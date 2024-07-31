@@ -179,9 +179,99 @@ class MyFrame extends JFrame implements ActionListener {
             animals[k].addActionListener(this);
             content.add(animals[k]);
         }
+        mb.add(content);
+        mb.add(view);
+        mb.add(program);
+        setJMenuBar(mb);
+        pm = new JPopupMenu();
+
+        for (int k = 0; k < cyrNames.length; k++) {
+            pm.add(new JMenuItem(cyrNames[k])).setActionCommand("" + k);
+            ((JMenuItem)pm.getComponent(k)).addActionListener(this);
+        }
+        pm.addSeparator();
+        pm.add(new JMenuItem("Выход", exitBin.getIcon())).addActionListener(e -> exitBin.doClick());
+
+        lbl.setComponentPopupMenu(pm);
+        btn.addActionListener(e -> System.exit(0));
+        exitBin.addActionListener(btn.getActionListeners()[0]);
+        nextBtn.addActionListener(e -> {
+            state = (state + 1) % (engNames.length);
+            setContent();
+        });
+        prevBtn.addActionListener(e -> {
+            state = state == 0?engNames.length - 1:(state - 1);
+            setContent();
+        });
+        startBtn.addActionListener(e -> {
+            state = 0;
+            setContent();
+        });
+        exit.addActionListener(exitBin.getActionListeners()[0]);
+        about.addActionListener(e -> {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "В программе используется панель меню\nи панель инструментов",
+                    "О программе",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        });
+        lbl.addMouseListener(new MouseAdapter() {
+        public void mousePressed(MouseEvent e) {
+            if (e.isPopupTrigger()) {
+                pm.show(e.getComponent(),e.getX(), e.getY());
+            }
+        }
+        });
+        color.addActionListener(e -> {
+            if (color.isSelected()) {
+                Ordinary.setEnabled(true);
+                Light.setEnabled(true);
+                Dark.setEnabled(true);
+                Pink.setEnabled(true);
+                Blue.setEnabled(true);
+                Green.setEnabled(true);
+                Cyan.setEnabled(true);
+                Red.setEnabled(true);
+                Yellow.setEnabled(true);
+                Orange.setEnabled(true);
+                Gray.setEnabled(true);
+            }
+            else {
+                Ordinary.setEnabled(false);
+                Light.setEnabled(false);
+                Dark.setEnabled(false);
+                Pink.setEnabled(false);
+                Blue.setEnabled(false);
+                Green.setEnabled(false);
+                Cyan.setEnabled(false);
+                Red.setEnabled(false);
+                Yellow.setEnabled(false);
+                Orange.setEnabled(false);
+                Gray.setEnabled(false);
+            }
+        });
+
+        Ordinary.addActionListener(e -> pnl.setBackground(clr[0]));
+        Light.addActionListener(e -> pnl.setBackground(clr[1]));
+        Dark.addActionListener(e -> pnl.setBackground(clr[2]));
+        Pink.addActionListener(e -> pnl.setBackground(clr[3]));
+        Blue.addActionListener(e -> pnl.setBackground(clr[4]));
+        Green.addActionListener(e -> pnl.setBackground(clr[5]));
+        Cyan.addActionListener(e -> pnl.setBackground(clr[6]));
+        Red.addActionListener(e -> pnl.setBackground(clr[7]));
+        Yellow.addActionListener(e -> pnl.setBackground(clr[8]));
+        Orange.addActionListener(e -> pnl.setBackground(clr[9]));
+        Gray.addActionListener(e -> pnl.setBackground(clr[10]));
+
+        setContent();
+        setVisible(true);
     }
 }
 
 
 class UsingMenuDemo {
+    public static void main(String[] args) {
+        new MyFrame();
+    }
 }
