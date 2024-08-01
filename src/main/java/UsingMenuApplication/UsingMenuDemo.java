@@ -20,10 +20,10 @@ class MyFrame extends JFrame implements ActionListener {
     private JLabel lbl;
     private JTextPane tp;
     private JMenuBar mb;
-    private JMenuItem about, exit;
+    private JMenuItem about, creator, exit;
     private JMenuItem[]animals;
     private JCheckBoxMenuItem color;
-    private JRadioButtonMenuItem Light, Dark, Ordinary, Pink, Blue, Green, Cyan, Red, Yellow, Orange, Gray;
+    private JRadioButtonMenuItem Light, Dark, Ordinary, Pink, Blue, Green, Cyan, Red, Gray;
     private JToolBar tb;
     private MyButton exitBin,  nextBtn, prevBtn, startBtn;
     private JPopupMenu pm;
@@ -32,6 +32,7 @@ class MyFrame extends JFrame implements ActionListener {
         MyButton(String txt) {
             super(new ImageIcon("C:\\Users\\dinky\\OneDrive\\Рабочий стол\\Java\\Java Core\\Уровень 9 Меню и панель инструментов\\Menu and toolbar\\src\\main\\java\\UsingMenuApplication\\img\\buttons\\" + txt));
             setFocusPainted(false);
+            setPreferredSize(new Dimension(50, 30));
         }
     }
 
@@ -66,9 +67,7 @@ class MyFrame extends JFrame implements ActionListener {
         clr[5] = Color.GREEN;
         clr[6] = Color.CYAN;
         clr[7] = Color.RED;
-        clr[8] = Color.YELLOW;
-        clr[9] = Color.ORANGE;
-        clr[10] = Color.GRAY;
+        clr[8] = Color.GRAY;
 
         imgs = new ImageIcon[engNames.length];
         files = new String[engNames.length];
@@ -76,9 +75,9 @@ class MyFrame extends JFrame implements ActionListener {
 
         for (int k = 0; k < engNames.length; k++) {
             imgs[k] = new ImageIcon("C:\\Users\\dinky\\OneDrive\\Рабочий стол\\Java\\Java Core\\Уровень 9 Меню и панель инструментов\\Menu and toolbar\\src\\main\\java\\UsingMenuApplication\\img\\animal\\" + engNames[k] + "jpg");
-            files[k] = "C:C:\\Users\\dinky\\OneDrive\\Рабочий стол\\Java\\Java Core\\Уровень 9 Меню и панель инструментов\\Menu and toolbar\\src\\main\\java\\UsingMenuApplication\\img\\animal\\" + engNames[k] + ".txt";  //разобрать тут
+            files[k] = "file:///C:/Users/dinky/OneDrive/Рабочий стол/Java/Java Core/Уровень 9 Меню и панель инструментов/Menu and toolbar/src/main/java/UsingMenuApplication/О животных/" + engNames[k] + ".txt";  //разобрать тут
             Image img = imgs[k].getImage();
-            Image scaledImg = img.getScaledInstance(150, 100, Image.SCALE_DEFAULT);
+            Image scaledImg = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
             imgs[k] = new ImageIcon(scaledImg);
         }
 
@@ -129,6 +128,8 @@ class MyFrame extends JFrame implements ActionListener {
         about = new JMenuItem("О программе");
         exit = new JMenuItem("Выход", exitBin.getIcon());
         program.add(about);
+        creator = new JMenuItem("О создателе");
+        program.add(creator);
         program.addSeparator();
         program.add(exit);
 
@@ -142,8 +143,6 @@ class MyFrame extends JFrame implements ActionListener {
         Green = new JRadioButtonMenuItem("Зеленый", false);
         Cyan = new JRadioButtonMenuItem("Морской", false);
         Red = new JRadioButtonMenuItem("Красный", false);
-        Yellow = new JRadioButtonMenuItem("Желтый", false);
-        Orange = new JRadioButtonMenuItem("Оранжевый", false);
         Gray = new JRadioButtonMenuItem("Серый", false);
 
         ButtonGroup bg = new ButtonGroup();
@@ -155,8 +154,6 @@ class MyFrame extends JFrame implements ActionListener {
         bg.add(Green);
         bg.add(Cyan);
         bg.add(Red);
-        bg.add(Yellow);
-        bg.add(Orange);
         bg.add(Gray);
 
         view.add(color);
@@ -169,8 +166,6 @@ class MyFrame extends JFrame implements ActionListener {
         view.add(Green);
         view.add(Cyan);
         view.add(Red);
-        view.add(Yellow);
-        view.add(Orange);
         view.add(Gray);
 
         for (int k = 0; k < animals.length; k++) {
@@ -208,6 +203,15 @@ class MyFrame extends JFrame implements ActionListener {
             setContent();
         });
         exit.addActionListener(exitBin.getActionListeners()[0]);
+
+        creator.addActionListener(e -> {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Привет, рад Вас тут видеть\n-это мое первое приложении на Java\nНе судите строго\uD83D\uDE04",
+                    "О Создателе",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        });
         about.addActionListener(e -> {
             JOptionPane.showMessageDialog(
                     this,
@@ -233,8 +237,6 @@ class MyFrame extends JFrame implements ActionListener {
                 Green.setEnabled(true);
                 Cyan.setEnabled(true);
                 Red.setEnabled(true);
-                Yellow.setEnabled(true);
-                Orange.setEnabled(true);
                 Gray.setEnabled(true);
             }
             else {
@@ -246,8 +248,6 @@ class MyFrame extends JFrame implements ActionListener {
                 Green.setEnabled(false);
                 Cyan.setEnabled(false);
                 Red.setEnabled(false);
-                Yellow.setEnabled(false);
-                Orange.setEnabled(false);
                 Gray.setEnabled(false);
             }
         });
@@ -260,9 +260,7 @@ class MyFrame extends JFrame implements ActionListener {
         Green.addActionListener(e -> pnl.setBackground(clr[5]));
         Cyan.addActionListener(e -> pnl.setBackground(clr[6]));
         Red.addActionListener(e -> pnl.setBackground(clr[7]));
-        Yellow.addActionListener(e -> pnl.setBackground(clr[8]));
-        Orange.addActionListener(e -> pnl.setBackground(clr[9]));
-        Gray.addActionListener(e -> pnl.setBackground(clr[10]));
+        Gray.addActionListener(e -> pnl.setBackground(clr[8]));
 
         setContent();
         setVisible(true);
