@@ -30,7 +30,7 @@ class MyFrame extends JFrame implements ActionListener {
 
     class MyButton extends JButton {
         MyButton(String txt) {
-            super(new ImageIcon("C:\\Users\\dinky\\OneDrive\\Рабочий стол\\Java\\Java Core\\Уровень 9 Меню и панель инструментов\\Menu and toolbar\\src\\main\\java\\UsingMenuApplication\\img\\buttons\\" + txt));
+            super(new ImageIcon("C:/Users/dinky/OneDrive/Рабочий стол/Java/Java Core/Уровень 9 Меню и панель инструментов/Menu and toolbar/src/main/java/UsingMenuApplication/img/buttons/" + txt));
             setFocusPainted(false);
             setPreferredSize(new Dimension(50, 30));
         }
@@ -42,7 +42,7 @@ class MyFrame extends JFrame implements ActionListener {
             tp.setPage(files[state]);
         }
         catch (IOException err) {
-            tp.setText("Информация недоступна");
+            tp.setText("Информация скоро появится");
         }
     }
 
@@ -74,8 +74,8 @@ class MyFrame extends JFrame implements ActionListener {
         animals = new JMenuItem[cyrNames.length];
 
         for (int k = 0; k < engNames.length; k++) {
-            imgs[k] = new ImageIcon("C:\\Users\\dinky\\OneDrive\\Рабочий стол\\Java\\Java Core\\Уровень 9 Меню и панель инструментов\\Menu and toolbar\\src\\main\\java\\UsingMenuApplication\\img\\animal\\" + engNames[k] + "jpg");
-            files[k] = "file:///C:/Users/dinky/OneDrive/Рабочий стол/Java/Java Core/Уровень 9 Меню и панель инструментов/Menu and toolbar/src/main/java/UsingMenuApplication/О животных/" + engNames[k] + ".txt";  //разобрать тут
+            imgs[k] = new ImageIcon("C:\\Users/dinky\\OneDrive\\Рабочий стол\\animal\\" + engNames[k] + "jpg");
+            files[k] = "file:///C:/Users/dinky/OneDrive/Рабочий стол/Java/Java Core/Уровень 9 Меню и панель инструментов/Menu and toolbar/src/main/java/UsingMenuApplication/About animals/" + engNames[k] + ".txt";
             Image img = imgs[k].getImage();
             Image scaledImg = img.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
             imgs[k] = new ImageIcon(scaledImg);
@@ -134,7 +134,6 @@ class MyFrame extends JFrame implements ActionListener {
         program.add(exit);
 
         color = new JCheckBoxMenuItem("Цвет панели", true);
-
         Light = new JRadioButtonMenuItem("Светлый", false);
         Dark = new JRadioButtonMenuItem("Черный", false);
         Ordinary = new JRadioButtonMenuItem("Обычный", true);
